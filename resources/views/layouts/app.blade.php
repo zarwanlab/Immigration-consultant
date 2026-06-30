@@ -162,11 +162,8 @@
     <!-- Footer -->
     <footer class="py-12 text-center text-slate-400 text-sm">
         <div class="max-w-7xl mx-auto px-6">
-            <p>Made with ❤️ by HERD AI</p>
-            <div class="mt-4 flex justify-center gap-6">
-                <a href="#" class="hover:text-primary transition-colors">Privacy Policy</a>
-                <a href="#" class="hover:text-primary transition-colors">Terms of Service</a>
-            </div>
+            <p>Made with ❤️ by Zarwan</p>
+            
         </div>
     </footer>
 </body>
