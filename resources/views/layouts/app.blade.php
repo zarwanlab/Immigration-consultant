@@ -3,8 +3,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ config('app.name', 'Immigration Consultant') }}</title>
+    <title>{{ config('app.name', 'Immigration Consultant') }} | AI-Powered Assessment</title>
     
+    <!-- Meta Tags -->
+    <meta name="description" content="Discover your best immigration options in minutes. AI-powered assessment for global immigration paths.">
+    <meta property="og:title" content="AI Immigration Consultant">
+    <meta property="og:description" content="Personalized immigration paths analyzed by AI. Fast, accurate, and free.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -15,6 +22,9 @@
 
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <!-- Alpine.js -->
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -122,8 +132,8 @@
                     <i class="fa-solid fa-passport text-white text-xl"></i>
                 </div>
                 <div class="flex flex-col">
-                    <span class="text-xl font-black text-slate-900 tracking-tighter leading-none">IMMIGRATION</span>
-                    <span class="text-[10px] font-bold text-secondary uppercase tracking-[0.2em] leading-none mt-1">Consultant</span>
+                    <span class="text-xl font-black text-slate-900 tracking-tighter leading-none">{{ __('IMMIGRATION') }}</span>
+                    <span class="text-[10px] font-bold text-secondary uppercase tracking-[0.2em] leading-none mt-1">{{ __('Consultant') }}</span>
                 </div>
             </a>
 

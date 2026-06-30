@@ -269,15 +269,26 @@
                         {{ __('Book Consultation') }}
                     </button>
                     <div class="flex-1 flex gap-2">
-                        <button @click="copyResultsToClipboard()" class="flex-1 py-5 px-4 rounded-2xl font-black border-2 border-slate-200 text-slate-700 text-center hover:bg-white hover:border-primary hover:text-primary transition-all flex items-center justify-center gap-2">
-                            <i class="fa-regular fa-copy"></i>
-                            <span class="text-sm">{{ __('Copy') }}</span>
+                        <button @click="shareOnWhatsApp()" class="flex-1 py-5 px-4 rounded-2xl font-black border-2 border-emerald-100 text-emerald-600 text-center hover:bg-emerald-50 hover:border-emerald-500 transition-all flex items-center justify-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-xl"></i>
+                            <span class="text-sm">{{ __('WhatsApp') }}</span>
                         </button>
-                        <button @click="downloadResultsAsTxt()" class="flex-1 py-5 px-4 rounded-2xl font-black border-2 border-slate-200 text-slate-700 text-center hover:bg-white hover:border-secondary hover:text-secondary transition-all flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-download"></i>
-                            <span class="text-sm">{{ __('Download') }}</span>
+                        <button @click="shareOnTelegram()" class="flex-1 py-5 px-4 rounded-2xl font-black border-2 border-sky-100 text-sky-600 text-center hover:bg-sky-50 hover:border-sky-500 transition-all flex items-center justify-center gap-2">
+                            <i class="fa-brands fa-telegram text-xl"></i>
+                            <span class="text-sm">{{ __('Telegram') }}</span>
                         </button>
                     </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2">
+                    <button @click="copyResultsToClipboard()" class="py-4 px-4 rounded-2xl font-bold border border-slate-200 text-slate-500 text-center hover:bg-white hover:border-primary hover:text-primary transition-all flex items-center justify-center gap-2 text-xs">
+                        <i class="fa-regular fa-copy"></i>
+                        {{ __('Copy Report') }}
+                    </button>
+                    <button @click="downloadResultsAsTxt()" class="py-4 px-4 rounded-2xl font-bold border border-slate-200 text-slate-500 text-center hover:bg-white hover:border-secondary hover:text-secondary transition-all flex items-center justify-center gap-2 text-xs">
+                        <i class="fa-solid fa-download"></i>
+                        {{ __('Download PDF/TXT') }}
+                    </button>
                 </div>
 
                 <div class="text-center pt-4">
@@ -526,13 +537,50 @@ function eligibilityChecker() {
                 // Refresh history list
                 await this.fetchHistory();
 
+                // Trigger Confetti
+                this.triggerConfetti();
+
                 this.step = this.totalSteps + 1;
             } catch (error) {
                 console.error(error);
-                this.errorMessage = this.__('Something went wrong with the AI service. Please try again.');
+                this.errorMessage = error.message === 'Too Many Requests' 
+                    ? this.__('Too many requests. Please wait a minute.') 
+                    : this.__('Something went wrong with the AI service. Please try again.');
             } finally {
                 this.loading = false;
             }
+        },
+
+        triggerConfetti() {
+            const count = 200;
+            const defaults = {
+                origin: { y: 0.7 },
+                colors: ['#0d47a1', '#00bcd4', '#10b981']
+            };
+
+            function fire(particleRatio, opts) {
+                confetti({
+                    ...defaults,
+                    ...opts,
+                    particleCount: Math.floor(count * particleRatio)
+                });
+            }
+
+            fire(0.25, { spread: 26, startVelocity: 55 });
+            fire(0.2, { spread: 60 });
+            fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
+            fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
+            fire(0.1, { spread: 120, startVelocity: 45 });
+        },
+
+        shareOnWhatsApp() {
+            const text = encodeURIComponent(this.getFormattedResults());
+            window.open(`https://wa.me/?text=${text}`, '_blank');
+        },
+
+        shareOnTelegram() {
+            const text = encodeURIComponent(this.getFormattedResults());
+            window.open(`https://t.me/share/url?url=${window.location.href}&text=${text}`, '_blank');
         },
 
         copyResultsToClipboard() {

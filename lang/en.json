@@ -1,4 +1,6 @@
 {
+    "IMMIGRATION": "IMMIGRATION",
+    "Consultant": "Consultant",
     "Eligibility Checker": "Eligibility Checker",
     "Age": "Age",
     "Education": "Education",
@@ -78,6 +80,11 @@
     "Results copied to clipboard!": "Results copied to clipboard!",
     "Copy": "Copy",
     "Download": "Download",
+    "Copy Report": "Copy Report",
+    "Download PDF/TXT": "Download PDF/TXT",
+    "WhatsApp": "WhatsApp",
+    "Telegram": "Telegram",
+    "Too many requests. Please wait a minute.": "Too many requests. Please wait a minute.",
     "Edit Profile": "Edit Profile",
     "All set!": "All set!",
     "We have all the information needed to generate your assessment.": "We have all the information needed to generate your assessment.",

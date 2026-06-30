@@ -1,4 +1,6 @@
 {
+    "IMMIGRATION": "الهجرة",
+    "Consultant": "مستشار ذكي",
     "Eligibility Checker": "فحص الأهلية للهجرة",
     "Age": "العمر",
     "Education": "التعليم",
@@ -78,6 +80,11 @@
     "Results copied to clipboard!": "تم نسخ النتائج إلى الحافظة!",
     "Copy": "نسخ",
     "Download": "تحميل",
+    "Copy Report": "نسخ التقرير",
+    "Download PDF/TXT": "تحميل PDF/TXT",
+    "WhatsApp": "واتساب",
+    "Telegram": "تلغرام",
+    "Too many requests. Please wait a minute.": "طلبات كثيرة جداً. يرجى الانتظار دقيقة.",
     "Edit Profile": "تعديل الملف الشخصي",
     "All set!": "كل شيء جاهز!",
     "We have all the information needed to generate your assessment.": "لدينا جميع المعلومات اللازمة لإنشاء التقييم الخاص بك.",

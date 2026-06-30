@@ -1,4 +1,6 @@
 {
+    "IMMIGRATION": "مهاجرت",
+    "Consultant": "مشاور هوشمند",
     "Eligibility Checker": "ارزیابی شرایط مهاجرت",
     "Age": "سن",
     "Education": "تحصیلات",
@@ -78,6 +80,11 @@
     "Results copied to clipboard!": "نتایج در حافظه کپی شد!",
     "Copy": "کپی",
     "Download": "دانلود",
+    "Copy Report": "کپی گزارش",
+    "Download PDF/TXT": "دانلود PDF/TXT",
+    "WhatsApp": "واتس‌اپ",
+    "Telegram": "تلگرام",
+    "Too many requests. Please wait a minute.": "تعداد درخواست‌ها زیاد است. لطفاً یک دقیقه صبر کنید.",
     "Edit Profile": "ویرایش پروفایل",
     "All set!": "همه چیز آماده است!",
     "We have all the information needed to generate your assessment.": "ما تمامی اطلاعات لازم برای تولید ارزیابی شما را در اختیار داریم.",
