@@ -73,17 +73,17 @@
                 @apply bg-white/70 backdrop-blur-xl border border-white/30 shadow-soft;
             }
             .glass-card {
-                @apply bg-white/80 backdrop-blur-2xl border border-white/40 shadow-soft rounded-4xl p-8 md:p-12 relative overflow-hidden;
+                @apply bg-white/80 backdrop-blur-2xl border border-white/40 shadow-soft rounded-2xl md:rounded-3xl p-4 md:p-12 relative overflow-hidden;
             }
             .glass-card::before {
                 content: '';
                 @apply absolute inset-0 bg-gradient-to-br from-white/20 to-transparent pointer-events-none;
             }
             .btn-primary {
-                @apply bg-primary text-white px-8 py-4 rounded-2xl font-bold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/20 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2;
+                @apply bg-primary text-white px-6 py-3 md:px-8 md:py-4 rounded-xl md:rounded-2xl font-bold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/20 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-sm md:text-base;
             }
             .option-button {
-                @apply p-6 rounded-2xl border-2 text-left transition-all duration-300 font-bold flex items-center justify-between group relative overflow-hidden;
+                @apply p-4 md:p-6 rounded-xl md:rounded-2xl border-2 text-left transition-all duration-300 font-bold flex items-center justify-between group relative overflow-hidden text-sm md:text-base;
             }
             .option-button-active {
                 @apply border-primary bg-primary/5 text-primary shadow-lg shadow-primary/5;
@@ -92,7 +92,30 @@
                 @apply border-slate-100 bg-white/50 hover:border-primary/30 hover:bg-white hover:shadow-md;
             }
             .step-indicator {
-                @apply w-10 h-10 rounded-xl flex items-center justify-center font-black transition-all duration-500;
+                @apply w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl flex items-center justify-center font-bold transition-all duration-500 text-sm md:text-base;
+            }
+        }
+        @media (max-width: 640px) {
+            .glass-card {
+                @apply rounded-xl p-4;
+            }
+            .btn-primary {
+                @apply w-full py-3 text-base;
+            }
+            .option-button {
+                @apply w-full py-4 text-base;
+            }
+            body {
+                @apply text-sm;
+            }
+            h1 {
+                @apply text-2xl;
+            }
+            h2 {
+                @apply text-xl;
+            }
+            h3 {
+                @apply text-lg;
             }
         }
         @keyframes fadeIn {
@@ -126,23 +149,23 @@
 
     <!-- Header -->
     <header class="sticky top-0 z-50 glass border-b border-white/20">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <a href="/" class="flex items-center gap-3 group">
-                <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform">
-                    <i class="fa-solid fa-passport text-white text-xl"></i>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 md:h-20 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-2 md:gap-3 group">
+                <div class="w-9 h-9 md:w-10 md:h-10 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-passport text-white text-lg md:text-xl"></i>
                 </div>
                 <div class="flex flex-col">
-                    <span class="text-xl font-black text-slate-900 tracking-tighter leading-none">{{ __('IMMIGRATION') }}</span>
-                    <span class="text-[10px] font-bold text-secondary uppercase tracking-[0.2em] leading-none mt-1">{{ __('Consultant') }}</span>
+                    <span class="text-lg md:text-xl font-black text-slate-900 tracking-tighter leading-none">{{ __('IMMIGRATION') }}</span>
+                    <span class="text-[9px] md:text-[10px] font-bold text-secondary uppercase tracking-[0.2em] leading-none mt-1">{{ __('Consultant') }}</span>
                 </div>
             </a>
 
-            <div class="flex items-center gap-4">
+            <div class="flex items-center gap-2 md:gap-4">
                 <!-- Language Switcher -->
                 <div x-data="{ open: false }" class="relative">
-                    <button @click="open = !open" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/50 hover:bg-white transition-colors border border-slate-200">
-                        <span class="uppercase font-bold text-sm text-slate-700">{{ app()->getLocale() }}</span>
-                        <svg class="w-4 h-4 transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <button @click="open = !open" class="flex items-center gap-2 px-3 py-2 md:px-4 md:py-2 rounded-xl bg-white/50 hover:bg-white transition-colors border border-slate-200">
+                        <span class="uppercase font-bold text-xs md:text-sm text-slate-700">{{ app()->getLocale() }}</span>
+                        <svg class="w-3 h-3 md:w-4 md:h-4 transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
                     <div x-show="open" @click.away="open = false" x-transition.opacity class="absolute right-0 mt-2 w-32 glass rounded-2xl overflow-hidden border border-white/30 z-50">
                         <a href="?lang=en" class="block px-4 py-3 text-sm font-medium text-slate-700 hover:bg-primary/5 transition-colors">English</a>
@@ -155,15 +178,14 @@
     </header>
 
     <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-6 py-12">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-6 md:py-12">
         @yield('content')
     </main>
 
     <!-- Footer -->
-    <footer class="py-12 text-center text-slate-400 text-sm">
-        <div class="max-w-7xl mx-auto px-6">
+    <footer class="py-8 md:py-12 text-center text-slate-400 text-sm">
+        <div class="max-w-7xl mx-auto px-4 md:px-6">
             <p>Made with ❤️ by Zarwan</p>
-            
         </div>
     </footer>
 </body>

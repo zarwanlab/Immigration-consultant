@@ -25,7 +25,7 @@ class EligibilityController extends Controller
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
+            CURLOPT_TIMEOUT => 60, // Increased to 60 seconds
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
@@ -73,7 +73,7 @@ Structure your response strictly as a JSON object with these keys:
         $aiContent = $result['choices'][0]['message']['content'] ?? null;
 
         if (!$aiContent) {
-            return response()->json(['error' => 'Invalid AI Response'], 500);
+            return response()->json(['error' => 'Invalid AI Response', 'raw_ai_response' => $response], 500);
         }
 
         // Clean JSON if AI returns it with markdown blocks
@@ -81,13 +81,8 @@ Structure your response strictly as a JSON object with these keys:
         $structuredData = json_decode(trim($aiContent), true);
 
         if (!$structuredData) {
-            return response()->json([
-                'countries' => ['Canada', 'Germany', 'Portugal'],
-                'paths' => ['Skilled Worker', 'Study Permit'],
-                'reason' => "We've analyzed your profile. " . $aiContent,
-                'gaps' => ['Please consult with our human experts for a more detailed breakdown.'],
-                'alternative' => 'Consider exploring digital nomad visas in Southern Europe.'
-            ]);
+            // If AI returns malformed JSON, return the raw content for debugging
+            return response()->json(['error' => 'AI returned malformed JSON', 'raw_ai_content' => $aiContent], 500);
         }
 
         return response()->json($structuredData);

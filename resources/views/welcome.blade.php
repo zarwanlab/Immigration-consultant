@@ -1,31 +1,31 @@
 @extends('layouts.app')
 
 @section('content')
-<div x-data="eligibilityChecker()" class="max-w-6xl mx-auto animate-fade-in">
+<div x-data="eligibilityChecker()" class="max-w-6xl mx-auto px-4 sm:px-6 animate-fade-in">
     <!-- Header Hero Section -->
-    <div class="text-center mb-16" x-show="step === 0" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 transform -translate-y-8" x-transition:enter-end="opacity-100 transform translate-y-0">
-        <div class="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-primary/5 border border-primary/10 text-primary text-sm font-bold mb-8">
+    <div class="text-center mb-8 md:mb-16" x-show="step === 0" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 transform -translate-y-8" x-transition:enter-end="opacity-100 transform translate-y-0">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 border border-primary/10 text-primary text-xs md:text-sm font-bold mb-4 md:mb-8">
             <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
             {{ __('AI-Powered Assessment') }}
         </div>
-        <h1 class="text-5xl md:text-7xl font-black mb-6 tracking-tight">
+        <h1 class="text-3xl sm:text-4xl md:text-7xl font-black mb-3 md:mb-6 tracking-tight">
             {{ __('Eligibility Checker') }}
         </h1>
-        <p class="text-xl text-slate-500 max-w-2xl mx-auto leading-relaxed">
+        <p class="text-base sm:text-lg md:text-xl text-slate-500 max-w-2xl mx-auto leading-relaxed px-2">
             {{ __('Discover your best immigration options in minutes.') }}
             {{ __('Our AI analyzes your profile to suggest the most suitable paths.') }}
         </p>
     </div>
 
     <!-- Main Container -->
-    <div id="main-content-area" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    <div id="main-content-area" class="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-8 items-start">
         
         <!-- Left Side: Form / Status -->
-        <div class="lg:col-span-7 space-y-8">
+        <div class="lg:col-span-7 space-y-4 md:space-y-8">
             <!-- Error Alert -->
             <div x-show="errorMessage" x-transition:enter="transition ease-out duration-300" 
-                 class="p-6 bg-danger/10 border border-danger/20 rounded-3xl flex items-start gap-4 animate-fade-in">
-                <i class="fa-solid fa-circle-exclamation text-danger text-xl mt-1"></i>
+                 class="p-4 md:p-6 bg-danger/10 border border-danger/20 rounded-2xl md:rounded-3xl flex items-start gap-3 md:gap-4 animate-fade-in">
+                <i class="fa-solid fa-circle-exclamation text-danger text-lg md:text-xl mt-1"></i>
                 <div class="flex-grow">
                     <h4 class="text-danger font-black text-sm mb-1">{{ __('Error Occurred') }}</h4>
                     <p class="text-xs text-danger/80 font-medium" x-text="errorMessage"></p>
@@ -36,15 +36,15 @@
             </div>
 
             <!-- Step-by-Step Form -->
-            <div class="glass-card" x-show="step > 0 && step <= totalSteps" x-transition:enter="transition ease-out duration-300">
+            <div class="glass-card !p-6 md:!p-12" x-show="step > 0 && step <= totalSteps" x-transition:enter="transition ease-out duration-300">
                 <!-- Progress Header -->
-                <div class="flex items-center justify-between mb-12" x-show="!isFinalStepSelected()">
+                <div class="flex items-center justify-between mb-6 md:mb-12" x-show="!isFinalStepSelected()">
                     <div>
-                        <h2 class="text-2xl font-black text-slate-900" x-text="currentStepTitle()"></h2>
-                        <p class="text-sm text-slate-500 mt-1">{{ __('Please select the option that best describes you.') }}</p>
+                        <h2 class="text-xl md:text-2xl font-black text-slate-900" x-text="currentStepTitle()"></h2>
+                        <p class="text-xs md:text-sm text-slate-500 mt-1">{{ __('Please select the option that best describes you.') }}</p>
                     </div>
                     <div class="text-right">
-                        <span class="block text-2xl font-black text-primary" x-text="step + '/' + totalSteps"></span>
+                        <span class="block text-xl md:text-2xl font-black text-primary" x-text="step + '/' + totalSteps"></span>
                         <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{{ __('Step') }}</span>
                     </div>
                 </div>
@@ -53,11 +53,11 @@
                 <div class="space-y-4" x-show="!isFinalStepSelected()">
                     <!-- Step 1: Age -->
                     <template x-if="step === 1">
-                        <div class="grid grid-cols-1 gap-3">
+                        <div class="grid grid-cols-1 gap-2 md:gap-3">
                             <template x-for="option in ageOptions">
                                 <button @click="formData.age = option; nextStep()" 
                                         :class="formData.age === option ? 'option-button-active' : 'option-button-inactive'"
-                                        class="option-button group">
+                                        class="option-button group !p-4 md:!p-6">
                                     <span x-text="__(option)"></span>
                                     <i class="fa-solid fa-chevron-right text-xs opacity-0 group-hover:opacity-100 transition-all rtl:rotate-180"></i>
                                 </button>
@@ -67,11 +67,11 @@
 
                     <!-- Step 2: Education -->
                     <template x-if="step === 2">
-                        <div class="grid grid-cols-1 gap-3">
+                        <div class="grid grid-cols-1 gap-2 md:gap-3">
                             <template x-for="option in educationOptions">
                                 <button @click="formData.education = option; nextStep()" 
                                         :class="formData.education === option ? 'option-button-active' : 'option-button-inactive'"
-                                        class="option-button group">
+                                        class="option-button group !p-4 md:!p-6">
                                     <span x-text="__(option)"></span>
                                     <i class="fa-solid fa-chevron-right text-xs opacity-0 group-hover:opacity-100 transition-all rtl:rotate-180"></i>
                                 </button>
@@ -81,11 +81,11 @@
 
                     <!-- Step 3: Work Experience -->
                     <template x-if="step === 3">
-                        <div class="grid grid-cols-1 gap-3">
+                        <div class="grid grid-cols-1 gap-2 md:gap-3">
                             <template x-for="option in workOptions">
                                 <button @click="formData.work = option; nextStep()" 
                                         :class="formData.work === option ? 'option-button-active' : 'option-button-inactive'"
-                                        class="option-button group">
+                                        class="option-button group !p-4 md:!p-6">
                                     <span x-text="__(option)"></span>
                                     <i class="fa-solid fa-chevron-right text-xs opacity-0 group-hover:opacity-100 transition-all rtl:rotate-180"></i>
                                 </button>
@@ -95,11 +95,11 @@
 
                     <!-- Step 4: Language -->
                     <template x-if="step === 4">
-                        <div class="grid grid-cols-1 gap-3">
+                        <div class="grid grid-cols-1 gap-2 md:gap-3">
                             <template x-for="option in languageOptions">
                                 <button @click="formData.language = option; nextStep()" 
                                         :class="formData.language === option ? 'option-button-active' : 'option-button-inactive'"
-                                        class="option-button group">
+                                        class="option-button group !p-4 md:!p-6">
                                     <span x-text="__(option)"></span>
                                     <i class="fa-solid fa-chevron-right text-xs opacity-0 group-hover:opacity-100 transition-all rtl:rotate-180"></i>
                                 </button>
@@ -109,11 +109,11 @@
 
                     <!-- Step 5: Capital -->
                     <template x-if="step === 5">
-                        <div class="grid grid-cols-1 gap-3">
+                        <div class="grid grid-cols-1 gap-2 md:gap-3">
                             <template x-for="option in capitalOptions">
                                 <button @click="formData.capital = option; nextStep()" 
                                         :class="formData.capital === option ? 'option-button-active' : 'option-button-inactive'"
-                                        class="option-button group">
+                                        class="option-button group !p-4 md:!p-6">
                                     <span x-text="__(option)"></span>
                                     <i class="fa-solid fa-chevron-right text-xs opacity-0 group-hover:opacity-100 transition-all rtl:rotate-180"></i>
                                 </button>
@@ -123,11 +123,11 @@
 
                     <!-- Step 6: Goal -->
                     <template x-if="step === 6">
-                        <div class="grid grid-cols-1 gap-3">
+                        <div class="grid grid-cols-1 gap-2 md:gap-3">
                             <template x-for="option in goalOptions">
                                 <button @click="formData.goal = option; nextStep()" 
                                         :class="formData.goal === option ? 'option-button-active' : 'option-button-inactive'"
-                                        class="option-button group">
+                                        class="option-button group !p-4 md:!p-6">
                                     <span x-text="__(option)"></span>
                                     <i class="fa-solid fa-chevron-right text-xs opacity-0 group-hover:opacity-100 transition-all rtl:rotate-180"></i>
                                 </button>
@@ -137,16 +137,16 @@
                 </div>
 
                 <!-- Final AI Call State -->
-                <div x-show="isFinalStepSelected()" x-transition:enter="transition ease-out duration-500" class="text-center py-8">
-                    <div class="w-20 h-20 bg-primary/10 text-primary rounded-3xl flex items-center justify-center mx-auto mb-6">
-                        <i class="fa-solid fa-wand-magic-sparkles text-3xl"></i>
+                <div x-show="isFinalStepSelected()" x-transition:enter="transition ease-out duration-500" class="text-center py-6 md:py-8">
+                    <div class="w-16 h-16 md:w-20 md:h-20 bg-primary/10 text-primary rounded-2xl md:rounded-3xl flex items-center justify-center mx-auto mb-4 md:mb-6">
+                        <i class="fa-solid fa-wand-magic-sparkles text-2xl md:text-3xl"></i>
                     </div>
-                    <h3 class="text-2xl font-black mb-2">{{ __('All set!') }}</h3>
-                    <p class="text-slate-500 mb-8">{{ __('We have all the information needed to generate your assessment.') }}</p>
+                    <h3 class="text-xl md:text-2xl font-black mb-2">{{ __('All set!') }}</h3>
+                    <p class="text-slate-500 mb-6 md:mb-8">{{ __('We have all the information needed to generate your assessment.') }}</p>
                 </div>
 
                 <!-- Form Navigation -->
-                <div class="mt-12 flex items-center justify-between border-t border-slate-100 pt-8">
+                <div class="mt-8 md:mt-12 flex items-center justify-between border-t border-slate-100 pt-6 md:pt-8">
                     <button @click="prevStep()" class="flex items-center gap-2 text-slate-400 font-bold hover:text-primary transition-all" x-show="step > 1 && !loading">
                         <i class="fa-solid fa-arrow-left rtl:rotate-180"></i>
                         {{ __('Previous') }}
@@ -160,27 +160,27 @@
             </div>
 
             <!-- Start State (Hero CTA) -->
-            <div class="glass-card text-center py-16" x-show="step === 0">
-                <div class="w-24 h-24 bg-primary/10 text-primary rounded-4xl flex items-center justify-center mx-auto mb-8">
-                    <i class="fa-solid fa-rocket text-4xl"></i>
+            <div class="glass-card text-center !p-8 md:!p-16" x-show="step === 0">
+                <div class="w-20 h-20 md:w-24 md:h-24 bg-primary/10 text-primary rounded-3xl md:rounded-4xl flex items-center justify-center mx-auto mb-6 md:mb-8">
+                    <i class="fa-solid fa-rocket text-3xl md:text-4xl"></i>
                 </div>
-                <h2 class="text-3xl font-black mb-4">{{ __('Ready to explore?') }}</h2>
-                <p class="text-slate-500 mb-10">{{ __('Answer a few questions and get your personalized plan.') }}</p>
-                <button @click="step = 1" class="btn-primary text-xl px-12">
+                <h2 class="text-2xl md:text-3xl font-black mb-3 md:mb-4">{{ __('Ready to explore?') }}</h2>
+                <p class="text-slate-500 mb-6 md:mb-10">{{ __('Answer a few questions and get your personalized plan.') }}</p>
+                <button @click="step = 1" class="btn-primary text-lg md:text-xl px-8 md:px-12">
                     {{ __('Start Assessment') }}
                 </button>
             </div>
 
             <!-- Loading State -->
-            <div class="glass-card text-center py-20" x-show="loading">
-                <div class="relative w-32 h-32 mx-auto mb-8">
+            <div class="glass-card text-center !p-12 md:!p-20" x-show="loading">
+                <div class="relative w-24 h-24 md:w-32 md:h-32 mx-auto mb-6 md:mb-8">
                     <div class="absolute inset-0 border-4 border-primary/10 rounded-full"></div>
                     <div class="absolute inset-0 border-4 border-t-primary rounded-full animate-spin"></div>
                     <div class="absolute inset-0 flex items-center justify-center">
-                        <i class="fa-solid fa-brain text-4xl text-primary animate-pulse"></i>
+                        <i class="fa-solid fa-brain text-3xl md:text-4xl text-primary animate-pulse"></i>
                     </div>
                 </div>
-                <h3 class="text-2xl font-black text-slate-900 mb-2">{{ __('Analyzing your profile...') }}</h3>
+                <h3 class="text-xl md:text-2xl font-black text-slate-900 mb-2">{{ __('Analyzing your profile...') }}</h3>
                 <p class="text-slate-500">{{ __('Our AI is evaluating the best immigration paths for you.') }}</p>
             </div>
 
@@ -505,6 +505,9 @@ function eligibilityChecker() {
                 }
             }, 100);
 
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 60000); // 60 seconds timeout
+
             try {
                 const response = await fetch('{{ route("get.ai.suggestion") }}', {
                     method: 'POST',
@@ -514,10 +517,16 @@ function eligibilityChecker() {
                     },
                     body: JSON.stringify({
                         formData: this.formData
-                    })
+                    }),
+                    signal: controller.signal // Attach the abort signal
                 });
 
-                if (!response.ok) throw new Error('AI Service Unavailable');
+                clearTimeout(timeoutId); // Clear the timeout if the fetch completes in time
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(errorText || 'AI Service Unavailable');
+                }
 
                 this.results = await response.json();
                 
@@ -543,9 +552,24 @@ function eligibilityChecker() {
                 this.step = this.totalSteps + 1;
             } catch (error) {
                 console.error(error);
-                this.errorMessage = error.message === 'Too Many Requests' 
-                    ? this.__('Too many requests. Please wait a minute.') 
-                    : this.__('Something went wrong with the AI service. Please try again.');
+                if (error.name === 'AbortError') {
+                    this.errorMessage = this.__('The AI service took too long to respond. Please try again.');
+                } else if (error.message.includes('Too Many Requests')) {
+                    this.errorMessage = this.__('Too many requests. Please wait a minute.');
+                } else {
+                    try {
+                        const errorResponse = JSON.parse(error.message);
+                        if (errorResponse.raw_ai_content) {
+                            this.errorMessage = this.__('AI returned malformed JSON. Raw content:') + ' ' + errorResponse.raw_ai_content;
+                        } else if (errorResponse.raw_ai_response) {
+                            this.errorMessage = this.__('Invalid AI Response. Raw response:') + ' ' + JSON.stringify(errorResponse.raw_ai_response);
+                        } else {
+                            this.errorMessage = this.__('Something went wrong with the AI service. Please try again.');
+                        }
+                    } catch (e) {
+                        this.errorMessage = this.__('Something went wrong with the AI service. Please try again.');
+                    }
+                }
             } finally {
                 this.loading = false;
             }
