@@ -97,25 +97,31 @@
         }
         @media (max-width: 640px) {
             .glass-card {
-                @apply rounded-xl p-4;
+                @apply rounded-none !p-6 border-x-0;
             }
             .btn-primary {
-                @apply w-full py-3 text-base;
+                @apply w-full py-4 text-base rounded-xl;
             }
             .option-button {
-                @apply w-full py-4 text-base;
+                @apply w-full py-5 text-base rounded-xl;
             }
             body {
-                @apply text-sm;
+                @apply text-sm bg-white;
+            }
+            main {
+                @apply !px-0 !py-0;
             }
             h1 {
-                @apply text-2xl;
+                @apply text-3xl px-4;
             }
             h2 {
-                @apply text-xl;
+                @apply text-2xl px-4;
             }
             h3 {
-                @apply text-lg;
+                @apply text-xl px-4;
+            }
+            .mobile-full-width {
+                @apply !max-w-none !w-full !px-0;
             }
         }
         @keyframes fadeIn {
@@ -149,28 +155,47 @@
 
     <!-- Header -->
     <header class="sticky top-0 z-50 glass border-b border-white/20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 md:h-20 flex items-center justify-between">
-            <a href="/" class="flex items-center gap-2 md:gap-3 group">
-                <div class="w-9 h-9 md:w-10 md:h-10 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform">
-                    <i class="fa-solid fa-passport text-white text-lg md:text-xl"></i>
+        <div class="max-w-7xl mx-auto px-4 md:px-8 h-16 md:h-24 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-3 md:gap-4 group">
+                <div class="w-10 h-10 md:w-12 md:h-12 bg-primary rounded-2xl flex items-center justify-center shadow-lg shadow-primary/20 group-hover:rotate-12 transition-transform duration-500">
+                    <i class="fa-solid fa-passport text-white text-xl md:text-2xl"></i>
                 </div>
                 <div class="flex flex-col">
-                    <span class="text-lg md:text-xl font-black text-slate-900 tracking-tighter leading-none">{{ __('IMMIGRATION') }}</span>
-                    <span class="text-[9px] md:text-[10px] font-bold text-secondary uppercase tracking-[0.2em] leading-none mt-1">{{ __('Consultant') }}</span>
+                    <span class="text-xl md:text-2xl font-black text-slate-900 tracking-tighter leading-none">{{ __('IMMIGRATION') }}</span>
+                    <span class="text-[10px] md:text-[11px] font-bold text-secondary uppercase tracking-[0.3em] leading-none mt-1.5">{{ __('Consultant') }}</span>
                 </div>
             </a>
 
             <div class="flex items-center gap-2 md:gap-4">
                 <!-- Language Switcher -->
                 <div x-data="{ open: false }" class="relative">
-                    <button @click="open = !open" class="flex items-center gap-2 px-3 py-2 md:px-4 md:py-2 rounded-xl bg-white/50 hover:bg-white transition-colors border border-slate-200">
-                        <span class="uppercase font-bold text-xs md:text-sm text-slate-700">{{ app()->getLocale() }}</span>
-                        <svg class="w-3 h-3 md:w-4 md:h-4 transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <button @click="open = !open" 
+                            class="flex items-center gap-2 px-3 py-2 md:px-4 md:py-2 rounded-xl bg-white/80 hover:bg-white transition-all border border-slate-200 shadow-sm active:scale-95">
+                        <i class="fa-solid fa-globe text-primary text-sm"></i>    
+                        <span class="uppercase font-black text-[10px] md:text-xs text-slate-700 tracking-wider">{{ app()->getLocale() }}</span>
+                        <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 transition-transform duration-300" :class="open ? 'rotate-180' : ''"></i>
                     </button>
-                    <div x-show="open" @click.away="open = false" x-transition.opacity class="absolute right-0 mt-2 w-32 glass rounded-2xl overflow-hidden border border-white/30 z-50">
-                        <a href="?lang=en" class="block px-4 py-3 text-sm font-medium text-slate-700 hover:bg-primary/5 transition-colors">English</a>
-                        <a href="?lang=fa" class="block px-4 py-3 text-sm font-medium text-slate-700 hover:bg-primary/5 transition-colors">فارسی</a>
-                        <a href="?lang=ar" class="block px-4 py-3 text-sm font-medium text-slate-700 hover:bg-primary/5 transition-colors">العربية</a>
+                    
+                    <div x-show="open" 
+                         @click.away="open = false" 
+                         x-transition:enter="transition ease-out duration-200"
+                         x-transition:enter-start="opacity-0 scale-95 translate-y-2"
+                         x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+                         class="absolute right-0 mt-3 w-40 glass rounded-2xl overflow-hidden border border-white/40 z-50 shadow-xl py-1">
+                        <a href="?lang=en" class="flex items-center justify-between px-4 py-3 text-xs font-bold text-slate-700 hover:bg-primary/5 transition-colors {{ app()->getLocale() == 'en' ? 'text-primary bg-primary/5' : '' }}">
+                            <span>English</span>
+                            <template x-if="'{{ app()->getLocale() }}' == 'en'"><i class="fa-solid fa-check text-[10px]"></i></template>
+                        </a>
+                        <div class="h-px bg-slate-100/50 mx-2"></div>
+                        <a href="?lang=fa" class="flex items-center justify-between px-4 py-3 text-xs font-bold text-slate-700 hover:bg-primary/5 transition-colors {{ app()->getLocale() == 'fa' ? 'text-primary bg-primary/5' : '' }}">
+                            <span>فارسی</span>
+                            <template x-if="'{{ app()->getLocale() }}' == 'fa'"><i class="fa-solid fa-check text-[10px]"></i></template>
+                        </a>
+                        <div class="h-px bg-slate-100/50 mx-2"></div>
+                        <a href="?lang=ar" class="flex items-center justify-between px-4 py-3 text-xs font-bold text-slate-700 hover:bg-primary/5 transition-colors {{ app()->getLocale() == 'ar' ? 'text-primary bg-primary/5' : '' }}">
+                            <span>العربية</span>
+                            <template x-if="'{{ app()->getLocale() }}' == 'ar'"><i class="fa-solid fa-check text-[10px]"></i></template>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -183,9 +208,19 @@
     </main>
 
     <!-- Footer -->
-    <footer class="py-8 md:py-12 text-center text-slate-400 text-sm">
+    <footer class="py-12 md:py-20 text-center relative">
         <div class="max-w-7xl mx-auto px-4 md:px-6">
-            <p>Made with ❤️ by Zarwan</p>
+            <div class="flex flex-col items-center gap-6">
+                <div class="w-12 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent"></div>
+                <div class="flex flex-col gap-2">
+                    <p class="text-slate-400 text-sm font-medium tracking-wide">
+                        {{ __('© 2024 Herd AI. All rights reserved.') }}
+                    </p>
+                    <p class="text-slate-300 text-[11px] font-bold uppercase tracking-[0.3em]">
+                        Made with ❤️ by Zarwan
+                    </p>
+                </div>
+            </div>
         </div>
     </footer>
 </body>

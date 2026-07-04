@@ -101,13 +101,24 @@ Structure your response strictly as a JSON object with these keys:
     {
         return "Candidate Profile Breakdown:
 - Current Age: {$data['age']}
+- Marital Status: {$data['marital_status']}
+- Professional Occupation/Sector: {$data['occupation']}
 - Highest Education: {$data['education']}
 - Professional Experience: {$data['work']}
-- Language Proficiency: {$data['language']}
+- General Language Proficiency: {$data['language']}
+- Language Certificate Score (IELTS/TOEFL/etc): {$data['language_score']}
+- Current Residence: {$data['current_residence']}
+- Preferred Target Region: {$data['target_region']}
+- Visa Refusal History: {$data['visa_refusal']}
 - Available Capital (USD): {$data['capital']}
+- Number of Dependents: {$data['dependents']}
 - Primary Motivation: {$data['goal']}
 
-Analyze the feasibility of relocation for this candidate based on 2024-2025 global immigration trends. Be specific about programs.";
+Analyze the feasibility of relocation for this candidate based on 2024-2025 global immigration trends. 
+Be highly specific about programs. Consider family-friendly paths if married/with children. 
+If they have a high-demand occupation (like IT, Engineering, Healthcare), prioritize countries with specialized work visas for those sectors.
+Take Current Residence and Target Region into account for visa processing times and local program eligibility (e.g. EU citizens vs Non-EU).
+If there is a Visa Refusal History, mention its impact on high-scrutiny countries (like Canada/Australia) and suggest safer alternatives.";
     }
 
     public function saveResult(Request $request)
