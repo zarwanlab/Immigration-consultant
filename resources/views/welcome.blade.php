@@ -509,34 +509,6 @@
                     {{ __('Our AI model is trained on latest global immigration policies to give you the most accurate starting point.') }}
                 </p>
             </div>
-
-            <!-- Recent Assessments History -->
-            <div class="glass-card !p-6 md:!p-8" x-init="fetchHistory()">
-                <h3 class="text-xl font-black mb-6 flex items-center gap-3">
-                    <i class="fa-solid fa-clock-rotate-left text-slate-400"></i>
-                    {{ __('Recent Assessments') }}
-                </h3>
-                <div class="space-y-3">
-                    <template x-for="(item, index) in history" :key="index">
-                        <div class="p-4 bg-white/50 rounded-2xl border border-white/30 hover:border-primary/20 transition-all cursor-default group/history animate-fade-in"
-                             :style="`animation-delay: ${index * 100}ms`"
-                             @click="formData = {...item.formData}; results = {...item.results}; step = totalSteps + 1; window.scrollTo({top: 0, behavior: 'smooth'})">
-                            <div class="flex justify-between items-center mb-1">
-                                <span class="text-[10px] font-black text-primary uppercase tracking-tighter" x-text="item.formData.goal"></span>
-                                <span class="text-[10px] text-slate-400" x-text="formatDate(item.timestamp)"></span>
-                            </div>
-                            <div class="flex flex-wrap gap-1">
-                                <template x-for="country in item.results.countries.slice(0, 2)">
-                                    <span class="text-[10px] bg-slate-100 px-2 py-0.5 rounded-md font-bold text-slate-600 group-hover/history:bg-primary/10 group-hover/history:text-primary transition-colors" x-text="country"></span>
-                                </template>
-                            </div>
-                        </div>
-                    </template>
-                    <template x-if="history.length === 0">
-                        <p class="text-xs text-slate-400 text-center py-4">{{ __('No history yet.') }}</p>
-                    </template>
-                </div>
-            </div>
         </div>
     </div>
 
