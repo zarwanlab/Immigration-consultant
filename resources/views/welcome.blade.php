@@ -49,7 +49,7 @@
                 <div class="flex items-center justify-between mb-8 md:mb-12 px-2 md:px-0" x-show="!isFinalStepSelected()">
                     <div class="flex-grow">
                         <h2 class="text-xl md:text-3xl font-black text-slate-900 leading-tight" x-text="currentStepTitle()"></h2>
-                        <p class="text-[11px] md:text-sm text-slate-500 mt-2 font-medium">{{ __('Please select the option that best describes you.') }}</p>
+                        <p class="text-[11px] md:text-sm text-slate-500 mt-2 font-medium" x-text="currentStepSubtitle()"></p>
                     </div>
                     <div class="text-right shrink-0 ml-4 rtl:mr-4 rtl:ml-0">
                         <span class="block text-2xl md:text-4xl font-black text-primary leading-none" x-text="step + '/' + totalSteps"></span>
@@ -129,8 +129,22 @@
                         </div>
                     </template>
 
-                    <!-- Step 6: Language -->
+                    <!-- Step 6: Language Certificate -->
                     <template x-if="step === 6">
+                        <div class="grid grid-cols-1 gap-2 md:gap-3">
+                            <template x-for="option in certificateLanguageOptions">
+                                <button @click="formData.certificate_language = option; nextStep()" 
+                                        :class="formData.certificate_language === option ? 'option-button-active' : 'option-button-inactive'"
+                                        class="option-button group !p-5 md:!p-6">
+                                    <span class="truncate" x-text="__(option)"></span>
+                                    <i class="fa-solid fa-chevron-right text-xs opacity-0 group-hover:opacity-100 transition-all rtl:rotate-180"></i>
+                                </button>
+                            </template>
+                        </div>
+                    </template>
+
+                    <!-- Step 7: Language Proficiency -->
+                    <template x-if="step === 7">
                         <div class="grid grid-cols-1 gap-2 md:gap-3">
                             <template x-for="option in languageOptions">
                                 <button @click="formData.language = option; nextStep()" 
@@ -143,8 +157,8 @@
                         </div>
                     </template>
 
-                    <!-- Step 7: Language Score -->
-                    <template x-if="step === 7">
+                    <!-- Step 8: Language Score -->
+                    <template x-if="step === 8">
                         <div class="grid grid-cols-1 gap-2 md:gap-3">
                             <template x-for="option in languageScoreOptions">
                                 <button @click="formData.language_score = option; nextStep()" 
@@ -157,8 +171,8 @@
                         </div>
                     </template>
 
-                    <!-- Step 8: Current Residence -->
-                    <template x-if="step === 8">
+                    <!-- Step 9: Current Residence -->
+                    <template x-if="step === 9">
                         <div class="grid grid-cols-1 gap-2 md:gap-3">
                             <template x-for="option in residenceOptions">
                                 <button @click="formData.current_residence = option; nextStep()" 
@@ -171,8 +185,8 @@
                         </div>
                     </template>
 
-                    <!-- Step 9: Target Region -->
-                    <template x-if="step === 9">
+                    <!-- Step 10: Target Region -->
+                    <template x-if="step === 10">
                         <div class="grid grid-cols-1 gap-2 md:gap-3">
                             <template x-for="option in targetOptions">
                                 <button @click="formData.target_region = option; nextStep()" 
@@ -185,8 +199,8 @@
                         </div>
                     </template>
 
-                    <!-- Step 10: Visa Refusal -->
-                    <template x-if="step === 10">
+                    <!-- Step 11: Visa Refusal -->
+                    <template x-if="step === 11">
                         <div class="grid grid-cols-1 gap-2 md:gap-3">
                             <template x-for="option in refusalOptions">
                                 <button @click="formData.visa_refusal = option; nextStep()" 
@@ -199,8 +213,8 @@
                         </div>
                     </template>
 
-                    <!-- Step 11: Capital -->
-                    <template x-if="step === 11">
+                    <!-- Step 12: Capital -->
+                    <template x-if="step === 12">
                         <div class="grid grid-cols-1 gap-2 md:gap-3">
                             <template x-for="option in capitalOptions">
                                 <button @click="formData.capital = option; nextStep()" 
@@ -213,8 +227,8 @@
                         </div>
                     </template>
 
-                    <!-- Step 12: Dependents -->
-                    <template x-if="step === 12">
+                    <!-- Step 13: Dependents -->
+                    <template x-if="step === 13">
                         <div class="grid grid-cols-1 gap-2 md:gap-3">
                             <template x-for="option in dependentsOptions">
                                 <button @click="formData.dependents = option; nextStep()" 
@@ -227,8 +241,8 @@
                         </div>
                     </template>
 
-                    <!-- Step 13: Goal -->
-                    <template x-if="step === 13">
+                    <!-- Step 14: Goal -->
+                    <template x-if="step === 14">
                         <div class="grid grid-cols-1 gap-2 md:gap-3">
                             <template x-for="option in goalOptions">
                                 <button @click="formData.goal = option; nextStep()" 
@@ -464,7 +478,11 @@
                         <span class="font-black text-slate-900 text-xs md:text-base" x-text="formData.work ? __(formData.work) : '—'"></span>
                     </div>
                     <div class="flex flex-col md:flex-row md:items-center justify-between p-3 md:p-4 bg-white/50 rounded-xl md:rounded-2xl border border-white/30">
-                        <span class="text-[9px] md:text-xs font-bold text-slate-400 uppercase tracking-widest">{{ __('Language') }}</span>
+                        <span class="text-[9px] md:text-xs font-bold text-slate-400 uppercase tracking-widest">{{ __('Language of Certificate') }}</span>
+                        <span class="font-black text-slate-900 text-xs md:text-base" x-text="formData.certificate_language ? __(formData.certificate_language) : '—'"></span>
+                    </div>
+                    <div class="flex flex-col md:flex-row md:items-center justify-between p-3 md:p-4 bg-white/50 rounded-xl md:rounded-2xl border border-white/30">
+                        <span class="text-[9px] md:text-xs font-bold text-slate-400 uppercase tracking-widest">{{ __('Language Proficiency') }}</span>
                         <span class="font-black text-slate-900 text-xs md:text-base" x-text="formData.language ? __(formData.language) : '—'"></span>
                     </div>
                     <div class="flex flex-col md:flex-row md:items-center justify-between p-3 md:p-4 bg-white/50 rounded-xl md:rounded-2xl border border-white/30">
@@ -531,7 +549,7 @@ function eligibilityChecker(whatsappNumber) {
     return {
         whatsappNumber: whatsappNumber || '',
         step: 0,
-        totalSteps: 13,
+        totalSteps: 14,
         loading: false,
         errorMessage: '',
         history: [],
@@ -541,6 +559,7 @@ function eligibilityChecker(whatsappNumber) {
             occupation: '',
             education: '',
             work: '',
+            certificate_language: '',
             language: '',
             language_score: '',
             current_residence: '',
@@ -555,6 +574,7 @@ function eligibilityChecker(whatsappNumber) {
         occupationOptions: ['IT & Software', 'Healthcare & Medical', 'Engineering', 'Business & Finance', 'Education & Research', 'Art & Design', 'Skilled Trades', 'Other Professional'],
         educationOptions: ['High School', "Bachelor's", "Master's", 'PhD'],
         workOptions: ['Less than 1 year', '1-3 years', '3-5 years', '5-10 years', '10+ years'],
+        certificateLanguageOptions: ['English', 'Mandarin Chinese', 'Spanish', 'French', 'Arabic', 'Hindi', 'Portuguese', 'Russian', 'German', 'Japanese', 'Korean', 'Turkish', 'Italian', 'Persian (Farsi)', 'No Certificate'],
         languageOptions: ['Beginner', 'Intermediate', 'Advanced', 'Native'],
         languageScoreOptions: ['No Certificate', 'Low (e.g. IELTS 5)', 'Medium (e.g. IELTS 6-6.5)', 'High (e.g. IELTS 7+)'],
         residenceOptions: ['Middle East', 'Europe', 'Asia', 'North America', 'South America', 'Africa', 'Oceania'],
@@ -601,16 +621,25 @@ function eligibilityChecker(whatsappNumber) {
                 3: this.__('Occupation'),
                 4: this.__('Education'),
                 5: this.__('Work Experience'),
-                6: this.__('Language Proficiency'),
-                7: this.__('IELTS/Score'),
-                8: this.__('Current Residence'),
-                9: this.__('Target Region'),
-                10: this.__('Visa Refusal History'),
-                11: this.__('Capital'),
-                12: this.__('Dependents'),
-                13: this.__('Immigration Goal')
+                6: this.__('Language of Certificate'),
+                7: this.__('Language Proficiency'),
+                8: this.__('IELTS/Score'),
+                9: this.__('Current Residence'),
+                10: this.__('Target Region'),
+                11: this.__('Visa Refusal History'),
+                12: this.__('Capital'),
+                13: this.__('Dependents'),
+                14: this.__('Immigration Goal')
             };
             return titles[this.step] || '';
+        },
+
+        currentStepSubtitle() {
+            if (this.step === 6) {
+                return this.__('Which language is your certificate for?');
+            }
+
+            return this.__('Please select the option that best describes you.');
         },
 
         isStepComplete() {
@@ -620,6 +649,7 @@ function eligibilityChecker(whatsappNumber) {
                 'occupation', 
                 'education', 
                 'work', 
+                'certificate_language',
                 'language', 
                 'language_score', 
                 'current_residence',
@@ -661,6 +691,7 @@ function eligibilityChecker(whatsappNumber) {
                 occupation: '',
                 education: '', 
                 work: '', 
+                certificate_language: '',
                 language: '', 
                 language_score: '',
                 current_residence: '',
@@ -831,7 +862,8 @@ function eligibilityChecker(whatsappNumber) {
 - Occupation: ${this.__ (this.formData.occupation)}
 - Education: ${this.__ (this.formData.education)}
 - Work Experience: ${this.__ (this.formData.work)}
-- Language Level: ${this.__ (this.formData.language)}
+- Language of Certificate: ${this.__ (this.formData.certificate_language)}
+- Language Proficiency: ${this.__ (this.formData.language)}
 - Certificate Score: ${this.__ (this.formData.language_score)}
 - Current Residence: ${this.__ (this.formData.current_residence)}
 - Target Region: ${this.__ (this.formData.target_region)}

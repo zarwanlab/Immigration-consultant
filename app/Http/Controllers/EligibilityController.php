@@ -105,6 +105,7 @@ Structure your response strictly as a JSON object with these keys:
 - Professional Occupation/Sector: {$data['occupation']}
 - Highest Education: {$data['education']}
 - Professional Experience: {$data['work']}
+- Language of Certificate: {$data['certificate_language']} (the exam/certificate language, not spoken language; if \"No Certificate\", treat it as no language certificate)
 - General Language Proficiency: {$data['language']}
 - Language Certificate Score (IELTS/TOEFL/etc): {$data['language_score']}
 - Current Residence: {$data['current_residence']}
